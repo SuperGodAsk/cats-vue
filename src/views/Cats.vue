@@ -1,33 +1,36 @@
 <template>
-    <div class="container main-wrapper">
-        <cat-title title="Котеечный приют"></cat-title>
-        <div class="row">
-            <div class="col-md-4">
-                <CatInput v-model="search" />
-                <hr>
-                <CatList :catsList="filteredCats"
-                         :currentCat="filteredCats[0]"
+    <div>
+        <div class="container main-wrapper">
+            <cat-title title="Котеечный приют"></cat-title>
+            <div class="row">
+                <div class="col-md-4">
+                    <CatInput v-model="search" />
+                    <hr>
+                    <CatList :catsList="filteredCats"
+                             :currentCat="filteredCats[0]"
 
-                         @selectCat="selectCat"/>
+                             @selectCat="selectCat"/>
+                </div>
+                <CatDetail
+                        :cat="activeCat"
+                        @toggleModal="toggleModal"
+                        :activeCatProperties="activeCatProperties"
+                />
             </div>
-            <CatDetail
-                    :cat="activeCat"
-                    @toggleModal="toggleModal"
-                    :activeCatProperties="activeCatProperties"
+            <CatLogs
+                    :logs="logs"
+                    v-if="logs.length"
             />
+            <CatModal
+                    v-if="modalVisibility"
+                    @toggleModal="toggleModal"
+                    @getCat="getCat"
+                    @cancelCat="cancelCat"
+                    :cat="activeCat"
+                    :activeCatProperties="activeCatProperties"/>
         </div>
-        <CatLogs
-                :logs="logs"
-                v-if="logs.length"
-        />
-        <CatModal
-                v-if="modalVisibility"
-                @toggleModal="toggleModal"
-                @getCat="getCat"
-                @cancelCat="cancelCat"
-                :cat="activeCat"
-                :activeCatProperties="activeCatProperties"/>
     </div>
+
 </template>
 
 <script>
