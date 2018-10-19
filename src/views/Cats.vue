@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="container main-wrapper">
+            {{ cats_items }}
             <cat-title title="Котеечный приют"></cat-title>
             <div class="row">
                 <div class="col-md-4">
@@ -40,8 +41,7 @@
     import CatModal from "@/components/CatModal.vue";
     import CatLogs from "@/components/CatLogs.vue";
     import CatInput from "@/components/CatInput.vue";
-
-
+    import { butter } from '@/buttercms'
 
 
 
@@ -56,27 +56,13 @@
         catConstructor(nextId++, "Пётр", '/assets/images/3.jpg', "Рыжий", "+7 954 333 68 98", "Колян", "4 года"),
     ];
 
-    // import Firebase from 'firebase'
-    //
-    // let config = {
-    //     apiKey: "AIzaSyCMF5YMr3oLbbTsupmSx6EhZiYlfdwbTKw",
-    //     authDomain: "cats-2a442.firebaseapp.com",
-    //     databaseURL: "https://cats-2a442.firebaseio.com",
-    //     projectId: "cats-2a442",
-    //     storageBucket: "cats-2a442.appspot.com",
-    //     messagingSenderId: "356677861509"
-    // }
-    //
-    // let app = Firebase.initializeApp(config);
-    // let bd = app.database();
-
     export default {
         name: "Cats",
         props: {},
         data() {
             return {
-                cats: cats,
-                activeCat: cats[0],
+                cats: [],
+                activeCat: null,
                 search: '',
                 modalVisibility: false,
                 logs: [],
@@ -88,7 +74,17 @@
             CatModal,
             CatTitle, CatList, CatDetail
         },
+        created(){
+            this.getCatsFromButter()
+        },
         methods: {
+            getCatsFromButter(){
+              butter.content.retrieve(['cats_list'])
+                  .then((res) => {
+                      this.cats = res.data.data.cats_list
+                      this.activeCat = this.cats[0]
+                  })
+            },
             selectCat(catItem) {
                 this.activeCat = catItem;
             },

@@ -4,7 +4,7 @@
             <!-- Header -->
             <header class="masthead bg-primary text-white text-center">
                 <div class="container">
-                    <img class="img-fluid mb-5 d-block mx-auto" src="img/profile.png" alt="">
+                    <img class="img-fluid mb-5 d-block mx-auto" src="/assets/images/profile.png" alt="">
                     <h1 class="text-uppercase mb-0">Start Bootstrap</h1>
                     <hr class="star-light">
                     <h2 class="font-weight-light mb-0">Web Developer - Graphic Artist - User Experience Designer</h2>
@@ -23,7 +23,7 @@
                                         <i class="fas fa-search-plus fa-3x"></i>
                                     </div>
                                 </div>
-                                <img class="img-fluid" src="img/portfolio/cabin.png" alt="">
+                                <img class="img-fluid" src="/assets/images/portfolio/cabin.png" alt="">
                             </a>
                         </div>
                         <div class="col-md-6 col-lg-4">
@@ -33,7 +33,7 @@
                                         <i class="fas fa-search-plus fa-3x"></i>
                                     </div>
                                 </div>
-                                <img class="img-fluid" src="img/portfolio/cake.png" alt="">
+                                <img class="img-fluid" src="/assets/images/portfolio/cake.png" alt="">
                             </a>
                         </div>
                         <div class="col-md-6 col-lg-4">
@@ -43,7 +43,7 @@
                                         <i class="fas fa-search-plus fa-3x"></i>
                                     </div>
                                 </div>
-                                <img class="img-fluid" src="img/portfolio/circus.png" alt="">
+                                <img class="img-fluid" src="/assets/images/portfolio/circus.png" alt="">
                             </a>
                         </div>
                         <div class="col-md-6 col-lg-4">
@@ -53,7 +53,7 @@
                                         <i class="fas fa-search-plus fa-3x"></i>
                                     </div>
                                 </div>
-                                <img class="img-fluid" src="img/portfolio/game.png" alt="">
+                                <img class="img-fluid" src="/assets/images/portfolio/game.png" alt="">
                             </a>
                         </div>
                         <div class="col-md-6 col-lg-4">
@@ -63,7 +63,7 @@
                                         <i class="fas fa-search-plus fa-3x"></i>
                                     </div>
                                 </div>
-                                <img class="img-fluid" src="img/portfolio/safe.png" alt="">
+                                <img class="img-fluid" src="/assets/images/portfolio/safe.png" alt="">
                             </a>
                         </div>
                         <div class="col-md-6 col-lg-4">
@@ -73,7 +73,7 @@
                                         <i class="fas fa-search-plus fa-3x"></i>
                                     </div>
                                 </div>
-                                <img class="img-fluid" src="img/portfolio/submarine.png" alt="">
+                                <img class="img-fluid" src="/assets/images/portfolio/submarine.png" alt="">
                             </a>
                         </div>
                     </div>

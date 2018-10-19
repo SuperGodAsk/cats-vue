@@ -31,7 +31,9 @@
     }
 
     .slide-left-enter-active + footer,
-    .slide-right-enter-active + footer{
+    .slide-right-enter-active + footer,
+    .slide-left-leave-active + footer,
+    .slide-right-leave-active + footer{
         margin-top: 100vh;
     }
     /*End animtation fix */
