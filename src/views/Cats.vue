@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="container main-wrapper">
+            {{ cats_list }}
             <cat-title title="Котеечный приют"></cat-title>
             <div class="row">
                 <div class="col-md-4">
@@ -44,7 +45,6 @@
 
 
 
-
     let nextId = 1;
 
     const log = (text, type, date = new Date()) => ({text,type,date});
@@ -56,20 +56,6 @@
         catConstructor(nextId++, "Пётр", '/assets/images/3.jpg', "Рыжий", "+7 954 333 68 98", "Колян", "4 года"),
     ];
 
-    // import Firebase from 'firebase'
-    //
-    // let config = {
-    //     apiKey: "AIzaSyCMF5YMr3oLbbTsupmSx6EhZiYlfdwbTKw",
-    //     authDomain: "cats-2a442.firebaseapp.com",
-    //     databaseURL: "https://cats-2a442.firebaseio.com",
-    //     projectId: "cats-2a442",
-    //     storageBucket: "cats-2a442.appspot.com",
-    //     messagingSenderId: "356677861509"
-    // }
-    //
-    // let app = Firebase.initializeApp(config);
-    // let bd = app.database();
-
     export default {
         name: "Cats",
         props: {},
@@ -80,6 +66,7 @@
                 search: '',
                 modalVisibility: false,
                 logs: [],
+                cats_list: []
             }
         },
         components: {

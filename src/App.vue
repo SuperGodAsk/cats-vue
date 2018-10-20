@@ -71,11 +71,12 @@
     import TemplateHeader from "./components/TemplateHeader";
     import TemplateFooter from "./components/TemplateFooter";
     import TemplateCopyright from "./components/TemplateCopyright";
+
     export default {
         components: {TemplateCopyright, TemplateFooter, TemplateHeader},
         data () {
             return {
-                transitionName : 'slide-left',
+                transitionName : 'slide-left'
             }
         },
         watch: {

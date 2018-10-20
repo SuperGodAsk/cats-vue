@@ -11,6 +11,7 @@
                 <ul class="navbar-nav ml-auto">
                     <v-link href="/">Главная</v-link>
                     <v-link href="/cats">Выбор котика</v-link>
+                    <v-link href="/cats/add">Добавить котика</v-link>
                 </ul>
             </div>
         </div>
