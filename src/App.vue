@@ -1,7 +1,7 @@
 <template>
   <body id="app">
     <template-header/>
-    <transition :name="transitionName">
+    <transition :name="transitionName" appear>
       <router-view class="page-container"/>
     </transition>
     <template-footer/>
@@ -32,7 +32,7 @@
 
     .slide-left-enter-active + footer,
     .slide-right-enter-active + footer{
-        margin-top: 100vh;
+        margin-top: 200vh;
     }
     /*End animtation fix */
 

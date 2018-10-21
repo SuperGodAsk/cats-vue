@@ -1,7 +1,6 @@
 <template>
     <div>
         <div class="container main-wrapper">
-            {{ cats_list }}
             <cat-title title="Котеечный приют"></cat-title>
             <div class="row">
                 <div class="col-md-4">
@@ -42,7 +41,7 @@
     import CatLogs from "@/components/CatLogs.vue";
     import CatInput from "@/components/CatInput.vue";
 
-
+    import {db} from '../main'
 
 
     let nextId = 1;
@@ -61,12 +60,15 @@
         props: {},
         data() {
             return {
-                cats: cats,
-                activeCat: cats[0],
+                cats: [],
                 search: '',
                 modalVisibility: false,
                 logs: [],
-                cats_list: []
+            }
+        },
+        firestore(){
+            return {
+                cats: db.collection('cats').orderBy('createdAt', 'desc'),
             }
         },
         components: {
@@ -96,18 +98,21 @@
             }
         },
         computed: {
+            activeCat(){
+                return this.cats[0]
+            },
             filteredCats() {
                 return this.cats.filter(cat => {
                     return cat.name.indexOf(this.search) > -1 || cat.color.indexOf(this.search) > -1
                 })
             },
-            activeCatProperties () {
-                return [
-                    {"Цвет": this.activeCat.color},
-                    {"Владелец": this.activeCat.owner},
-                    {"Возраст": this.activeCat.age}
-                ]
-            }
+            // activeCatProperties () {
+            //     return [
+            //         {"Цвет": this.activeCat.color},
+            //         {"Владелец": this.activeCat.owner},
+            //         {"Возраст": this.activeCat.age}
+            //     ]
+            // }
         }
     }
 </script>

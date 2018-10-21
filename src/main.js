@@ -25,7 +25,9 @@ let config = {
 firebase.initializeApp(config)
 const settings = {timestampsInSnapshots: true}
 export const db = firebase.firestore()
+export const storage = firebase.storage()
 db.settings(settings)
+
 
 Vue.config.productionTip = false
 
