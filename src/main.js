@@ -5,6 +5,9 @@ import store from './store'
 import 'bootstrap'
 import sassStyles from './assets/scss/freelancer.scss'
 
+import Vuelidate from 'vuelidate' // Валидация форм
+Vue.use(Vuelidate)
+
 import VueFire from 'vuefire'
 import firebase from 'firebase'
 // Required for side-effects
@@ -20,9 +23,9 @@ let config = {
     messagingSenderId: "476331547370"
 };
 firebase.initializeApp(config)
-const settings = {timestampsInSnapshots: true};
+const settings = {timestampsInSnapshots: true}
 export const db = firebase.firestore()
-db.settings(settings);
+db.settings(settings)
 
 Vue.config.productionTip = false
 
