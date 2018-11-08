@@ -31,6 +31,7 @@
             selectCat: function (catItem) {
                 this.activeCat = catItem;
                 this.$emit('selectCat', catItem);
+                this.$store.commit('setActiveCat',catItem)
             }
         }
     }

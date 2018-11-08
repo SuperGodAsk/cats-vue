@@ -47,13 +47,6 @@
     let nextId = 1;
 
     const log = (text, type, date = new Date()) => ({text,type,date});
-    const catConstructor = (id, name, img, color, phone, owner, age) => ({id, name, img, color, phone, owner, age});
-
-    const cats = [
-        catConstructor(nextId++, "Иннокентий", '/assets/images/1.jpg', "Серый", "+7 954 654 98 74", "Макс", "3 года"),
-        catConstructor(nextId++, "Василий", '/assets/images/2.jpg', "Бурый", "+7 649 874 32 14", "Юлия", "2 года"),
-        catConstructor(nextId++, "Пётр", '/assets/images/3.jpg', "Рыжий", "+7 954 333 68 98", "Колян", "4 года"),
-    ];
 
     export default {
         name: "Cats",

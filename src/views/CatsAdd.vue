@@ -266,7 +266,7 @@
             },
             upload(file, x) {
                 const date = new Date(),
-                    subPath = String(date.getDay()) + String(date.getMonth()) + String(date.getFullYear()) + '/' + file.name
+                    subPath = String(date.getDay()) + String(date.getMonth()) + String(date.getFullYear()) + '/' + String(date) + file.name
                 var task = storage.ref('images/' + subPath).put(file)
                 this.uploadTask[x] = task // Создаем массив заданий на асинхронную загрузку файлов
             },
