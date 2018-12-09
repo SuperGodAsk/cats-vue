@@ -147,7 +147,7 @@
                 </div>
                 <div class="row">
                     <transition-group name="list" class="col-12 d-flex flex-column align-items-stretch" tag="div">
-                        <div v-for="(cat,idx) in cats" :key="idx"
+                        <div v-for="(cat) in cats" :key="cat.id"
                              class="row d-inline-flex border-bottom border-primary">
                             <div class="col-3 py-3 pl-5">{{cat.name}}</div>
                             <div class="col-3 py-3 pl-5">{{cat.owner}}</div>
@@ -225,9 +225,10 @@
                     const name = this.$v.name.$model,
                         owner = this.$v.owner.$model,
                         phone = this.$v.phone.$model,
-                        createdAt = new Date()
+                        createdAt = new Date(),
+                        imagesList = this.uploadFiles
 
-                    db.collection('cats').add({name, owner, phone, createdAt})
+                    db.collection('cats').add({name, owner, phone, createdAt, imagesList})
                     this.$v.$reset()
                     this.showAlert = true
                     setTimeout(() => {

@@ -111,8 +111,5 @@
 </script>
 
 <style scoped>
-.main-wrapper{
-    padding-top: calc(6rem + 106px);
-    padding-bottom: 6rem;
-}
+
 </style>

@@ -1,11 +1,11 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
     <div class="col-md-8 pt-3">
         <div class="row">
             <div class="col-md-5">
                 <h2>{{ cat.name }}</h2>
                 <img
-                        :src="cat.img"
-                        :alt="cat.name"
+                        :src="cat.imagesList[0].url"
+                        :alt="cat.imagesList[0].name"
                         class="rounded cat-image">
             </div>
             <div class="col-md-7 pt-2">
