@@ -12,6 +12,7 @@
                     <v-link href="/">Главная</v-link>
                     <v-link href="/cats">Выбор котика</v-link>
                     <v-link href="/cats/add">Добавить котика</v-link>
+                    <v-link href="/login">Авторизация</v-link>
                 </ul>
             </div>
         </div>

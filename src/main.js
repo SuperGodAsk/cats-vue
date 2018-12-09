@@ -12,6 +12,7 @@ import VueFire from 'vuefire'
 import firebase from 'firebase'
 // Required for side-effects
 import "firebase/firestore";
+
 Vue.use(VueFire)
 
 let config = {
@@ -31,8 +32,18 @@ db.settings(settings)
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('body')
+
+
+let app = '';
+
+firebase.auth().onAuthStateChanged(() => {
+    if (!app) {
+        app = new Vue({
+            router,
+            store,
+            render: h => h(App)
+        }).$mount('body')
+    }
+})
+
+

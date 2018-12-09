@@ -18,6 +18,10 @@
         position: relative;
         width: 100%;
     }
+    .main-wrapper{
+      padding-top: calc(6rem + 106px);
+      padding-bottom: 6rem;
+    }
     .slide-left-enter-active .main-wrapper,
     .slide-right-enter-active .main-wrapper,
     .slide-left-leave-active .main-wrapper,
