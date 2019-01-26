@@ -1,97 +1,77 @@
 <template>
-  <body id="app">
-    <template-header/>
-    <transition :name="transitionName" appear>
-      <router-view class="page-container"/>
-    </transition>
-    <template-footer/>
-    <template-copyright/>
-  </body>
+  <v-app>
+    <v-navigation-drawer
+            fixed
+            :mini-variant="miniVariant"
+            v-model="drawer"
+            app
+    >
+      <v-list>
+        <v-list-tile
+                router
+                :to="item.to"
+                :key="i"
+                v-for="(item, i) in items"
+                exact
+        >
+          <v-list-tile-action>
+            <v-icon v-html="item.icon"></v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title v-text="item.title"></v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar fixed app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-btn icon @click.stop="miniVariant = !miniVariant" v-if="drawer">
+        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
+      </v-btn>
+      <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat to="/" exact>Home</v-btn>
+      </v-toolbar-items>
+
+    </v-toolbar>
+    <v-content>
+      <v-container fill-height>
+        <v-slide-y-transition mode="out-in">
+            <router-view></router-view>
+        </v-slide-y-transition>
+      </v-container>
+    </v-content>
+    <v-footer :fixed="fixed" app>
+    </v-footer>
+  </v-app>
 </template>
-<style lang="scss">
-    /*Animation fix */
-    body {
-        display: flex;
-        flex-direction: column;
-    }
-    .page-container{
-        position: relative;
-        width: 100%;
-    }
-    .main-wrapper{
-      padding-top: calc(6rem + 106px);
-      padding-bottom: 6rem;
-    }
-    .slide-left-enter-active .main-wrapper,
-    .slide-right-enter-active .main-wrapper,
-    .slide-left-leave-active .main-wrapper,
-    .slide-right-leave-active .main-wrapper
-    {
-        position: absolute;
-        width: 100%;
-        top: 0;
-        transform: translateX(-50%);
-        left: 50%;
-    }
-
-    .slide-left-enter-active + footer,
-    .slide-right-enter-active + footer{
-        margin-top: 200vh;
-    }
-    /*End animtation fix */
-
-    .slide-left-enter-active, .slide-right-enter-active, .slide-left-leave-active, .slide-right-leave-active{
-        transition:1s ease-in-out;
-
-    }
-    .slide-left-enter{
-        transform: translate(-100%,0);
-    }
-    .slide-left-enter-to{
-        transform: translate(0,0);
-    }
-    .slide-right-enter{
-        transform: translate(100%,0);
-    }
-    .slide-right-enter-to{
-        transform: translate(0,0);
-    }
-    .slide-left-leave{
-        transform: translate(0,0);
-    }
-    .slide-left-leave-to{
-        transform: translate(100%,0);
-    }
-    .slide-right-leave{
-        transform: translate(0,0);
-    }
-    .slide-right-leave-to{
-        transform: translate(-100%,0);
-    }
-@import'~bootstrap/dist/css/bootstrap.css'
-
-</style>
 <script>
-    import TemplateHeader from "./components/TemplateHeader";
-    import TemplateFooter from "./components/TemplateFooter";
-    import TemplateCopyright from "./components/TemplateCopyright";
     import firebase from 'firebase'
 
     export default {
-        components: {TemplateCopyright, TemplateFooter, TemplateHeader},
-        data () {
-            return {
-                transitionName : 'slide-left'
-            }
-        },
-        watch: {
-            '$route' (to, from) {
-                scroll(0, 0)
-                this.transitionName = (to.name === 'home') ? 'slide-left' : 'slide-right'
-            }
-        },
         created(){
             this.$store.commit('setUserInfo',firebase.auth().currentUser)
+            this.$router.options.routes.forEach(route => {
+                this.items.push({
+                    icon: route.mdIcon,
+                    title: route.title,
+                    to: route.path,
+                })
+            })
+
+        },
+        data () {
+            return {
+                drawer: false,
+                fixed: false,
+                items: [],
+                miniVariant: false,
+                right: true,
+                title: 'Котеечный приют',
+                name: ''
+            }
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <ul class="list-group" v-if="catsList.length">
+    <v-list v-if="catsList.length">
         <CatListItem
                 v-for="catItem in catsList"
                 :key="catItem.id"
@@ -7,7 +7,7 @@
                 :currentCat="activeCat"
                 @selectCat="selectCat"
         />
-    </ul>
+    </v-list>
 </template>
 
 <script>

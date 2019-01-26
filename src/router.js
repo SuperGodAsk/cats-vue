@@ -11,11 +11,15 @@ const router = new Router({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
+            title: 'Главная',
+            mdIcon: 'home'
         },
         {
             path: '/cats',
             name: 'cats',
+            title: 'Список котиков',
+            mdIcon: 'list',
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
@@ -24,6 +28,8 @@ const router = new Router({
         {
             path: '/cats/add',
             name: 'cats-add',
+            title: 'Добавить котика',
+            mdIcon: 'add',
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
@@ -35,6 +41,8 @@ const router = new Router({
         {
             path: '/login',
             name: 'login',
+            title: 'Авторизация',
+            mdIcon: 'person',
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
@@ -43,6 +51,8 @@ const router = new Router({
         {
             path: '/signup',
             name: 'signup',
+            title: 'Регистрация',
+            mdIcon: 'person_add',
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.

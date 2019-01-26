@@ -16,12 +16,3 @@
         components: {CatsAddForm, CatsAddList},
     }
 </script>
-
-<style scoped lang="scss">
-    .main-wrapper {
-        padding-top: calc(6rem + 106px);
-        padding-bottom: 6rem;
-    }
-
-
-</style>

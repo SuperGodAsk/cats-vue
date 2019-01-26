@@ -1,53 +1,61 @@
-<template xmlns="http://www.w3.org/1999/html">
-    <div class="col-md-8 pt-3">
-        <div class="row">
-            <div class="col-md-5">
-                <h2>{{ cat.name }}</h2>
-                <img
-                        :src="cat.imagesList[0].url"
-                        :alt="cat.imagesList[0].name"
-                        class="rounded cat-image">
-            </div>
-            <div class="col-md-7 pt-2">
-                <h5>Информация о котике</h5>
-                <CatPropsList :propsList="activeCatProperties"/>
-
-                <div class="phone-block mb-3">
-                    <transition name="phone">
-                        <p v-if="phoneVisibility">{{ cat.phone }}</p>
-                    </transition>
-                </div>
-
-                <button
-                        class="btn btn-outline-success mr-3"
-                        @click="phoneVisibility = !phoneVisibility"
-                        v-text="buttonText"
-                />
-                <button
-                        class="btn btn-primary"
-                        @click="toggleModal"
-                >Приютить</button>
-            </div>
-        </div>
-    </div>
+<template>
+    <v-slide-y-transition mode="out-in">
+        <v-layout justify-center>
+            <v-flex md8 xs12>
+                <v-card>
+                    <v-carousel height="250">
+                        <v-carousel-item
+                                v-for="(item,i) in cat.imagesList"
+                                :key="i"
+                                :src="item.url"
+                                height="250"
+                        ></v-carousel-item>
+                    </v-carousel>
+                    <v-card-title primary-title>
+                        <div>
+                            <h2 class="headline mb-2">{{ cat.name }}</h2>
+                            <!--@TODO Настроить вывод свойств -->
+                        </div>
+                    </v-card-title>
+                    <v-card-actions>
+                        <v-scroll-x-transition>
+                            <v-btn
+                                    small
+                                    flat
+                                    color="primary"
+                                    v-if="phoneVisibility"
+                            >
+                                <v-icon>phone</v-icon>
+                                {{cat.phone}}
+                            </v-btn>
+                        </v-scroll-x-transition>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green"
+                               @click="phoneVisibility = !phoneVisibility"
+                               v-text="buttonText"></v-btn>
+                        <v-btn color="blue"
+                               @click="toggleModal"
+                        >Приютить
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-slide-y-transition>
 </template>
 
 <script>
-    import CatPropsList from "./CatPropsList.vue";
-
     export default {
         name: "CatDetail",
-        components: {CatPropsList},
         props: {
             cat: {
                 type: Object,
                 required: true
-            },
-            activeCatProperties: Array,
+            }
         },
-        data () {
+        data() {
             return {
-                phoneVisibility : false
+                phoneVisibility: false
             }
         },
         computed: {
@@ -62,20 +70,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .cat-image {
-        height: 200px;
-    }
-    .phone-block{
-        height: 36px;
-    }
-    .phone-enter-active, .phone-leave-active{
-        transition: all .5s;
-    }
-    .phone-enter, .phone-leave-to{
-        transform:  translateX(50px);
-        opacity: 0;
-    }
-
-</style>

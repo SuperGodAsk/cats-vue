@@ -1,9 +1,8 @@
 import Vue from 'vue'
+import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import 'bootstrap'
-import sassStyles from './assets/scss/freelancer.scss'
 
 import Vuelidate from 'vuelidate' // Валидация форм
 Vue.use(Vuelidate)
@@ -40,7 +39,7 @@ firebase.auth().onAuthStateChanged(() => {
             router,
             store,
             render: h => h(App)
-        }).$mount('body')
+        }).$mount('#app')
     }
 })
 

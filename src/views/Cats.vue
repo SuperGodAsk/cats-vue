@@ -1,40 +1,63 @@
 <template>
-    <div>
-        <div class="container main-wrapper">
-            <cat-title title="Котеечный приют"></cat-title>
-            <div class="row">
-                <div class="col-md-4">
-                    <CatInput v-model="search" />
-                    <hr>
+    <v-layout>
+        <v-flex xs-12>
+            <v-layout>
+                <v-flex md4 sm12 px-4>
+                    <h1>Наши котики</h1>
+                    <v-text-field
+                            label="Приюти себе котика"
+                            placeholder="Введите имя"
+                            append-icon="search"
+                            v-model="search">
+                    </v-text-field>
                     <CatList :catsList="filteredCats"
                              :currentCat="filteredCats[0]"
 
                              @selectCat="selectCat"/>
-                </div>
-                <CatDetail
-                        :cat="activeCat"
-                        @toggleModal="toggleModal"
-                        :activeCatProperties="activeCatProperties"
-                />
-            </div>
-            <CatLogs
-                    :logs="logs"
-                    v-if="logs.length"
-            />
-            <CatModal
-                    v-if="modalVisibility"
-                    @toggleModal="toggleModal"
-                    @getCat="getCat"
-                    @cancelCat="cancelCat"
-                    :cat="activeCat"
-                    :activeCatProperties="activeCatProperties"/>
-        </div>
-    </div>
+                </v-flex>
+                <v-flex md8 sm12>
+                        <CatDetail
+                                v-if="activeCat"
+                                :cat="activeCat"
+                                @toggleModal="toggleModal"
+                        />
+                </v-flex>
+                <v-snackbar
+                        v-if="logs.length"
+                        v-for="log in logs"
+                        v-model="log.show"
+                        bottom
+                        right
+                        timeout="4000"
 
+                >
+                    {{log.text}}
+                    <v-btn
+                            color="pink"
+                            flat
+                            @click="log.show = false"
+                    >
+                        Close
+                    </v-btn>
+                </v-snackbar>
+                <v-dialog
+                        v-model="modalVisibility"
+                        max-width="400"
+                >
+                    <CatModal
+                            @toggleModal="toggleModal"
+                            @getCat="getCat"
+                            @cancelCat="cancelCat"
+                            :cat="activeCat"
+                            :activeCatProperties="activeCatProperties"
+                    />
+                </v-dialog>
+            </v-layout>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
-    import CatTitle from '@/components/CatTitle.vue'
     import CatList from '@/components/CatList/CatList.vue'
     import CatDetail from '@/components/CatDetail/CatDetail.vue'
     import CatModal from "@/components/CatModal.vue";
@@ -46,7 +69,7 @@
 
     let nextId = 1;
 
-    const log = (text, type, date = new Date()) => ({text,type,date});
+    const log = (text, type, date = new Date(), show = true) => ({text, type, date, show});
 
     export default {
         name: "Cats",
@@ -57,9 +80,10 @@
                 search: '',
                 modalVisibility: false,
                 logs: [],
+                activeCat: {},
             }
         },
-        firestore(){
+        firestore() {
             return {
                 cats: db.collection('cats').orderBy('createdAt', 'desc'),
             }
@@ -68,7 +92,7 @@
             CatInput,
             CatLogs,
             CatModal,
-            CatTitle, CatList, CatDetail
+            CatList, CatDetail
         },
         methods: {
             selectCat(catItem) {
@@ -77,39 +101,25 @@
             toggleModal() {
                 this.modalVisibility = !this.modalVisibility
             },
-            getCat(cat){
+            getCat(cat) {
                 this.modalVisibility = false;
                 this.logs.push(
-                    log(`Была оставлена заявка на приручение котика: ${cat.name}. Владелец: ${cat.owner}. Телефон: ${cat.phone}.`,true)
+                    log(`Была оставлена заявка на приручение котика: ${cat.name}.`, true),
                 )
             },
-            cancelCat(cat){
+            cancelCat(cat) {
                 this.modalVisibility = false;
                 this.logs.push(
-                    log(`Котик: ${cat.name} остался без владельца ;( . Владелец: ${cat.owner}. Телефон: ${cat.phone}.`,false)
+                    log(`Котик ${cat.name} остался без владельца :(`, false)
                 )
             }
         },
         computed: {
-            activeCat(){
-                return this.cats[0]
-            },
             filteredCats() {
                 return this.cats.filter(cat => {
-                    return cat.name.indexOf(this.search) > -1 || cat.color.indexOf(this.search) > -1
+                    return cat.name.indexOf(this.search) > -1
                 })
             },
-            // activeCatProperties () {
-            //     return [
-            //         {"Цвет": this.activeCat.color},
-            //         {"Владелец": this.activeCat.owner},
-            //         {"Возраст": this.activeCat.age}
-            //     ]
-            // }
         }
     }
 </script>
-
-<style scoped>
-
-</style>
