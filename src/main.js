@@ -23,16 +23,14 @@ let config = {
     storageBucket: "cats-2-30908.appspot.com",
     messagingSenderId: "476331547370"
 };
+
 firebase.initializeApp(config)
 const settings = {timestampsInSnapshots: true}
 export const db = firebase.firestore()
 export const storage = firebase.storage()
 db.settings(settings)
 
-
-Vue.config.productionTip = false
-
-
+Vue.config.productionTip = true
 
 let app = '';
 

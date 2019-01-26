@@ -112,9 +112,10 @@
                         owner = this.$v.owner.$model,
                         phone = this.$v.phone.$model,
                         createdAt = new Date(),
-                        imagesList = this.imagesList
+                        imagesList = this.imagesList,
+                        userId = this.$store.state.user.uid
 
-                    db.collection('cats').add({name, owner, phone, createdAt, imagesList})
+                    db.collection('cats').add({name, owner, phone, createdAt, imagesList,userId})
                     this.$v.$reset()
                     this.showAlert = true
                     setTimeout(() => {

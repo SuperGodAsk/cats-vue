@@ -75,6 +75,7 @@
     import TemplateHeader from "./components/TemplateHeader";
     import TemplateFooter from "./components/TemplateFooter";
     import TemplateCopyright from "./components/TemplateCopyright";
+    import firebase from 'firebase'
 
     export default {
         components: {TemplateCopyright, TemplateFooter, TemplateHeader},
@@ -88,6 +89,9 @@
                 scroll(0, 0)
                 this.transitionName = (to.name === 'home') ? 'slide-left' : 'slide-right'
             }
+        },
+        created(){
+            this.$store.commit('setUserInfo',firebase.auth().currentUser)
         }
     }
 </script>
